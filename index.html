@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shawaiz | Portfolio</title>
+  <meta name="description" content="Shawaiz – Class 9 student, 500+ video edits (shorts, character, velocity), motion & 3D; learning DaVinci Resolve and web development." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: {
+              bg: '#0b1020',       // deep indigo
+              panel: '#0f162e',    // card glass bg
+              border: '#1e2749',   // borders
+              text: '#e6e9f5',     // bright text
+              soft: '#a8b3cf',     // secondary text
+            },
+            glow: {
+              a: '#7c3aed', // violet
+              b: '#22d3ee', // cyan
+              c: '#10e7a1', // mint
+              d: '#f59e0b', // amber
+            }
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(124,58,237,.25), 0 12px 40px rgba(34,211,238,.12)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html{scroll-behavior:smooth}
+    .section{scroll-margin-top:96px}
+    /* Background mesh + grid */
+    body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(60rem 40rem at 20% -10%, rgba(124,58,237,.18), transparent 60%),radial-gradient(50rem 30rem at 110% 20%, rgba(34,211,238,.16), transparent 60%),radial-gradient(30rem 25rem at -10% 110%, rgba(16,231,161,.12), transparent 60%)}
+    body::after{content:"";position:fixed;inset:0;z-index:-1;opacity:.06;background-image:linear-gradient(to right, rgba(230,233,245,.35) 1px, transparent 1px),linear-gradient(to bottom, rgba(230,233,245,.35) 1px, transparent 1px);background-size:32px 32px}
+
+    /* NAV */
+    .navlink{position:relative;display:flex;align-items:center;gap:.55rem;padding:.6rem .85rem;border-radius:.9rem;color:#c7d2fe;transition:transform .2s ease, background-color .2s ease, filter .2s ease}
+    .navlink svg{opacity:.9}
+    .navlink.active{background:linear-gradient(90deg, rgba(124,58,237,.18), rgba(34,211,238,.18));transform:translateY(-1px)}
+    .navlink.active::after{content:"";position:absolute;left:.9rem;right:.9rem;bottom:-6px;height:3px;border-radius:9999px;background:linear-gradient(90deg, #7c3aed, #22d3ee)}
+
+    /* Cards (glass) */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid #1e2749;border-radius:1rem;backdrop-filter: blur(8px);box-shadow:0 10px 30px rgba(2,8,23,.35);transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+    .card:hover{transform:translateY(-3px);box-shadow:0 24px 60px rgba(2,8,23,.55);border-color:#2a3570}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;border-radius:1rem;padding:.65rem 1rem;font-weight:600}
+    .btn-grad{background:linear-gradient(90deg,#7c3aed,#22d3ee,#10e7a1);color:#061021}
+    .btn-grad:hover{filter:brightness(1.1)}
+    .btn-outline{border:1px solid #2a3570;color:#e6e9f5}
+    .btn-outline:hover{background:#1a2244}
+
+    /* Projects stack (folder opening) */
+    .stack{position:relative;display:flex;align-items:flex-start;gap:0}
+    .stack .fileCard{position:relative;width:260px;flex:0 0 auto;border:1px solid #1e2749;border-radius:.9rem;background:#0f162e;box-shadow:0 8px 24px rgba(0,0,0,.45);overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease, filter .25s ease;transform-origin:left center;margin-left:-228px}
+    .stack .fileCard:first-child{margin-left:0}
+    .stack .fileCard .thumb{height:100%;width:100%;object-fit:cover;filter:saturate(1.05) contrast(1.05)}
+    .stack .fileCard .fileTab{position:absolute;top:0;left:0;width:56px;height:32px;background:linear-gradient(90deg,#7c3aed,#22d3ee);border-bottom-right-radius:10px}
+    .stack .fileCard .fileTab:after{content:"";position:absolute;top:0;right:-14px;width:14px;height:32px;background:#0f162e;clip-path:polygon(0 0, 0% 100%, 100% 0)}
+    .stack:hover .fileCard{box-shadow:0 28px 70px rgba(0,0,0,.6)}
+    .stack:hover .fileCard:nth-child(1){transform:translateX(0)    scale(1.02);transition-delay:0ms}
+    .stack:hover .fileCard:nth-child(2){transform:translateX(110px) scale(1.02);transition-delay:60ms}
+    .stack:hover .fileCard:nth-child(3){transform:translateX(220px) scale(1.02);transition-delay:120ms}
+    .stack:hover .fileCard:nth-child(4){transform:translateX(330px) scale(1.02);transition-delay:180ms}
+    @media (max-width: 640px){.stack{overflow-x:auto;padding-bottom:.5rem}.stack .fileCard{margin-left:-180px;width:220px}}
+  .navlink::before{content:"";position:absolute;inset:0;border-radius:.9rem;background:linear-gradient(90deg,rgba(124,58,237,.15),rgba(34,211,238,.15));opacity:0;transition:opacity .25s ease} .navlink:hover::before{opacity:1} .navlink span{position:relative;z-index:1}
+  .navlink.active{background:linear-gradient(90deg, rgba(124,58,237,.25), rgba(34,211,238,.25));transform:translateY(-2px) scale(1.05);box-shadow:0 0 12px rgba(124,58,237,.4),0 0 24px rgba(34,211,238,.3);} .navlink.active::before{opacity:1}
+  </style>
+</head>
+<body class="bg-base-bg text-base-text antialiased">
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 border-b border-base-border bg-[rgba(15,22,46,.7)] backdrop-blur">
+    <nav class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <a href="#home" class="text-lg font-semibold tracking-tight text-white">shawaiz.dev</a>
+      <div class="hidden md:flex items-center gap-1 text-sm" id="nav">
+        <a href="#about"   class="navlink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>About</a>
+        <a href="#skills"  class="navlink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 8h10M7 12h8M7 16h6"/></svg>Skills</a>
+        <a href="#services"class="navlink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 13V7a2 2 0 0 0-2-2h-3l-2-2-2 2H6a2 2 0 0 0-2 2v6"/><rect x="2" y="13" width="20" height="8" rx="2"/></svg>Services</a>
+        <a href="#projects"class="navlink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>Projects</a>
+        <a href="#hire"    class="navlink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>Hire Me</a>
+      </div>
+      <a href="#hire" class="hidden sm:inline-flex btn btn-grad">Hire me</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="section mx-auto max-w-6xl px-4 py-12 sm:py-16">
+    <div class="grid lg:grid-cols-3 gap-10 items-center">
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-5 mt-2">
+          <img src="https://unavatar.io/tiktok/shawezzz" alt="Shawaiz TikTok avatar" class="h-32 w-32 rounded-full ring-4 ring-[rgba(124,58,237,.6)] shadow-glow object-cover" loading="lazy" onerror="this.src='https://api.iconify.design/solar:user-circle-bold-duotone.svg?color=%23ffffff';this.classList.remove('object-cover')">
+          <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight text-white">Hi, I'm
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-glow-a via-glow-b to-glow-c">Shawaiz</span> 👋
+          </h1>
+        </div>
+        <p class="mt-4 text-lg text-base-soft max-w-3xl">
+          Class 9 student at <span class="font-semibold text-white">Fazaia Inter College Minhas</span>. Video editor with <span class="font-semibold text-white">2.5 years</span> experience —
+          <span class="font-semibold text-white">500+ videos</span> across <span class="font-semibold text-white">shorts</span>, <span class="font-semibold text-white">character edits</span>, <span class="font-semibold text-white">velocity edits</span>, plus
+          <span class="font-semibold text-white">motion graphics</span> & <span class="font-semibold text-white">3D</span>. Learning <span class="font-semibold text-white">DaVinci Resolve</span> and <span class="font-semibold text-white">web development</span>. Hobbies: swimming, editing, exploring.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3 text-sm">
+          <span class="inline-flex items-center gap-2 rounded-full border border-base-border bg-base-panel/80 px-3 py-1">🏆 91% in Class 8</span>
+          <span class="inline-flex items-center gap-2 rounded-full border border-base-border bg-base-panel/80 px-3 py-1">🎬 500+ videos</span>
+          <span class="inline-flex items-center gap-2 rounded-full border border-base-border bg-base-panel/80 px-3 py-1">⚡ Shorts • Character • Velocity</span>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#projects" class="btn btn-grad">See my work</a>
+          <a href="#hire" class="btn btn-outline">Hire Me</a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-video rounded-2xl overflow-hidden card">
+          <!-- Editing-related hero image -->
+          <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?q=80&w=1600&auto=format&fit=crop" alt="Studio mixer and timeline screens (editing)" class="h-full w-full object-cover"/>
+        </div>
+        <p class="mt-3 text-center text-xs text-base-soft">Swap later with your reel thumbnail.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section mx-auto max-w-6xl px-4 py-16">
+    <h2 class="text-2xl font-semibold text-white">About</h2>
+    <div class="mt-6 grid lg:grid-cols-3 gap-6">
+      <div class="card p-6">
+        <h3 class="font-semibold text-white">Who I am</h3>
+        <p class="mt-2 text-base-soft">A creative student who loves edits that tell a story. Clean cuts, sharp beats, clear visuals.</p>
+      </div>
+      <div class="card p-6">
+        <h3 class="font-semibold text-white">Tools</h3>
+        <p class="mt-2 text-base-soft">CapCut, Alight Motion; learning DaVinci Resolve. Web: HTML, CSS, JS.</p>
+      </div>
+      <div class="card p-6">
+        <h3 class="font-semibold text-white">Goals</h3>
+        <p class="mt-2 text-base-soft">Build pro reels, master color & audio, ship cool web projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section mx-auto max-w-6xl px-4 py-16">
+    <h2 class="text-2xl font-semibold text-white">Skills</h2>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="card p-4"><p class="font-medium text-white">Shorts Editing</p><p class="text-sm text-base-soft">Hooks, pacing, captions, SFX</p></div>
+      <div class="card p-4"><p class="font-medium text-white">Character & Velocity</p><p class="text-sm text-base-soft">Speed ramps, beat sync, impacts</p></div>
+      <div class="card p-4"><p class="font-medium text-white">Motion Graphics</p><p class="text-sm text-base-soft">Animated titles, transitions</p></div>
+      <div class="card p-4"><p class="font-medium text-white">3D & Tools</p><p class="text-sm text-base-soft">3D text & effects; CapCut, AM, DaVinci (learning)</p></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section mx-auto max-w-6xl px-4 py-16">
+    <h2 class="text-2xl font-semibold text-white">Services</h2>
+    <p class="mt-2 text-base-soft">Simple, student‑friendly packages. DM for custom work.</p>
+    <div class="mt-6 grid md:grid-cols-3 gap-6">
+      <div class="card p-6"><h3 class="font-semibold text-white">Short‑form Reels</h3><p class="mt-2 text-base-soft">15–60s edits with captions & SFX.</p><ul class="mt-3 text-sm text-base-soft list-disc list-inside"><li>Hook → story → CTA</li><li>Platform‑ready export</li></ul></div>
+      <div class="card p-6"><h3 class="font-semibold text-white">Character / Velocity</h3><p class="mt-2 text-base-soft">Speed ramps, impacts, stylized motion.</p><ul class="mt-3 text-sm text-base-soft list-disc list-inside"><li>Transitions & glow hits</li><li>Precision timing</li></ul></div>
+      <div class="card p-6"><h3 class="font-semibold text-white">3D Intros & Titles</h3><p class="mt-2 text-base-soft">Logo stings, simple VFX.</p><ul class="mt-3 text-sm text-base-soft list-disc list-inside"><li>Clean sound design</li><li>Transparent background (opt.)</li></ul></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS (folder-opening stack) -->
+  <section id="projects" class="section mx-auto max-w-6xl px-4 py-16">
+    <h2 class="text-2xl font-semibold text-white">Projects</h2>
+    <p class="mt-2 text-base-soft">Folder-style stack — hover to open left → right.</p>
+
+    <div class="stack mt-8">
+      <!-- Anime Edit -->
+      <a class="fileCard group" href="https://www.youtube.com/shorts/xUw9wpTAsi8" target="_blank" rel="noopener noreferrer">
+        <div class="fileTab"></div>
+        <div class="aspect-video">
+          <img src="https://img.youtube.com/vi/xUw9wpTAsi8/hqdefault.jpg" alt="Anime edit (YouTube thumbnail)" class="thumb"/>
+        </div>
+        <div class="p-3">
+          <p class="font-medium text-base-text">Anime Edit</p>
+          <p class="text-xs text-base-soft">Cuts • Beat sync • Pacing</p>
+        </div>
+      </a>
+      <!-- Gaming Edit 1 -->
+      <a class="fileCard group" href="https://www.youtube.com/shorts/5llUSZlLJJw" target="_blank" rel="noopener noreferrer">
+        <div class="fileTab"></div>
+        <div class="aspect-video">
+          <img src="https://img.youtube.com/vi/5llUSZlLJJw/hqdefault.jpg" alt="Gaming edit (YouTube thumbnail)" class="thumb"/>
+        </div>
+        <div class="p-3">
+          <p class="font-medium text-base-text">Gaming Edit</p>
+          <p class="text-xs text-base-soft">Velocity • Impact hits</p>
+        </div>
+      </a>
+      <!-- Gaming Edit 2 -->
+      <a class="fileCard group" href="https://www.youtube.com/shorts/lEGSXaBmoBY" target="_blank" rel="noopener noreferrer">
+        <div class="fileTab"></div>
+        <div class="aspect-video">
+          <img src="https://img.youtube.com/vi/lEGSXaBmoBY/hqdefault.jpg" alt="Gaming edit (YouTube thumbnail)" class="thumb"/>
+        </div>
+        <div class="p-3">
+          <p class="font-medium text-base-text">Gaming Edit</p>
+          <p class="text-xs text-base-soft">Speed ramps • Transitions</p>
+        </div>
+      </a>
+      <!-- Gaming Edit 3 -->
+      <a class="fileCard group" href="https://www.youtube.com/watch?v=TIcc2VM6lWU" target="_blank" rel="noopener noreferrer">
+        <div class="fileTab"></div>
+        <div class="aspect-video">
+          <img src="https://i.ytimg.com/vi/TIcc2VM6lWU/hqdefault.jpg" alt="Gaming edit (YouTube thumbnail)" class="thumb"/>
+        </div>
+        <div class="p-3">
+          <p class="font-medium text-base-text">Gaming Edit</p>
+          <p class="text-xs text-base-soft">Cinematic pacing & effects</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- EXTRAS -->
+  <section id="extras" class="section mx-auto max-w-6xl px-4 pb-4 -mt-8">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card p-6">
+        <h3 class="font-semibold text-white">Testimonials</h3>
+        <blockquote class="mt-3 text-sm border-l-4 border-[rgba(124,58,237,.6)] pl-3 text-base-soft">“Shawaiz’s timing and transitions are on point. Quick turnaround too!” — <span class="text-white/80">A classmate</span></blockquote>
+        <blockquote class="mt-3 text-sm border-l-4 border-[rgba(34,211,238,.6)] pl-3 text-base-soft">“Great reels. Clear story and pacing.” — <span class="text-white/80">Teacher</span></blockquote>
+      </div>
+      <div class="card p-6">
+        <h3 class="font-semibold text-white">FAQ</h3>
+        <details class="mt-3 group">
+          <summary class="cursor-pointer list-none font-medium text-white">What files should I send?</summary>
+          <p class="mt-2 text-sm text-base-soft">Upload your raw clips (Drive link), music, and any text you want on screen. Reference links help a lot.</p>
+        </details>
+        <details class="mt-3 group">
+          <summary class="cursor-pointer list-none font-medium text-white">Do you do color grading and sound?</summary>
+          <p class="mt-2 text-sm text-base-soft">Yes — choose the extras in the Hire Me form to include color and sound design.</p>
+        </details>
+        <details class="mt-3 group">
+          <summary class="cursor-pointer list-none font-medium text-white">How fast can you deliver?</summary>
+          <p class="mt-2 text-sm text-base-soft">Rush in 24h for short edits. Standard is 2–3 days depending on footage.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIRE ME -->
+  <section id="hire" class="section mx-auto max-w-6xl px-4 py-16">
+    <div class="card p-8">
+      <h2 class="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-glow-a via-glow-b to-glow-c">Hire Me</h2>
+      <p class="mt-2 text-base-soft">Fill this quick brief. It will open your email with all details prefilled to <strong>indiapak935@gmail.com</strong>.</p>
+
+      <form id="hireForm" class="mt-6 grid gap-6 md:grid-cols-2">
+        <div>
+          <label class="block text-sm font-medium text-white">Video Type</label>
+          <select id="type" class="mt-2 w-full rounded-lg border border-base-border bg-base-panel px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-glow-b/60">
+            <option>Short‑form Reel</option>
+            <option>Character Edit</option>
+            <option>Velocity Edit</option>
+            <option>3D Intro / Title</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-white">Duration</label>
+          <select id="duration" class="mt-2 w-full rounded-lg border border-base-border bg-base-panel px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-glow-b/60">
+            <option>15 sec</option>
+            <option>30 sec</option>
+            <option>45 sec</option>
+            <option>60 sec</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-white">Turnaround</label>
+          <select id="turnaround" class="mt-2 w-full rounded-lg border border-base-border bg-base-panel px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-glow-b/60">
+            <option>24 hours (rush)</option>
+            <option>2–3 days</option>
+            <option>4–5 days</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-white">Extras</label>
+          <div class="mt-2 grid grid-cols-2 gap-2 text-sm text-base-soft">
+            <label class="inline-flex items-center gap-2"><input type="checkbox" id="captions"> Captions</label>
+            <label class="inline-flex items-center gap-2"><input type="checkbox" id="sound"> Sound design</label>
+            <label class="inline-flex items-center gap-2"><input type="checkbox" id="color"> Color grade</label>
+            <label class="inline-flex items-center gap-2"><input type="checkbox" id="thumb"> Thumbnail</label>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-white">Number of Raw Clips</label>
+          <input id="clips" type="number" min="1" value="3" class="mt-2 w-full rounded-lg border border-base-border bg-base-panel px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-glow-b/60" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-white">Deadline</label>
+          <input id="deadline" type="date" class="mt-2 w-full rounded-lg border border-base-border bg-base-panel px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-glow-b/60" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-white">Brief / Notes (links to footage, mood, music)</label>
+          <textarea id="notes" rows="4" class="mt-2 w-full rounded-lg border border-base-border bg-base-panel px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-glow-b/60" placeholder="Share Drive links, reference edits, color mood, text to include, etc."></textarea>
+        </div>
+        <div class="md:col-span-2 flex flex-wrap gap-3">
+          <button type="submit" class="btn btn-grad">Send Brief</button>
+          <a href="mailto:indiapak935@gmail.com" class="btn btn-outline">Email Directly</a>
+        </div>
+        <p class="text-xs text-base-soft md:col-span-2">Your email app will open with subject and message prefilled. No account form submissions are stored.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="border-t border-base-border py-8 bg-[rgba(15,22,46,.6)]">
+    <div class="mx-auto max-w-6xl px-4 text-sm text-base-soft flex items-center justify-between">
+      <p>© <span id="year"></span> Shawaiz. All rights reserved.</p>
+      <a href="#home" class="hover:text-white">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById('year')?.textContent = new Date().getFullYear();
+
+    // Scrollspy
+    const sections = Array.from(document.querySelectorAll('.section'));
+    const navLinks = Array.from(document.querySelectorAll('#nav .navlink'));
+    const idFor = href => href.replace('#','');
+    const activate = id => {
+      navLinks.forEach(a => {
+        const isActive = idFor(a.getAttribute('href')) === id;
+        a.classList.toggle('active', isActive);
+        if (isActive) {
+          a.setAttribute('aria-current','section');
+        } else {
+          a.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    // Use IntersectionObserver and always pick the MOST visible section
+    const io = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) activate(visible.target.id);
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: Array.from({length:11},(_,i)=>i/10) });
+
+    sections.forEach(sec => io.observe(sec));
+
+    // Hire Me form -> mailto prefill
+    document.getElementById('hireForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const type = document.getElementById('type').value;
+      const duration = document.getElementById('duration').value;
+      const turnaround = document.getElementById('turnaround').value;
+      const extras = [
+        document.getElementById('captions').checked ? 'Captions' : null,
+        document.getElementById('sound').checked ? 'Sound design' : null,
+        document.getElementById('color').checked ? 'Color grade' : null,
+        document.getElementById('thumb').checked ? 'Thumbnail' : null,
+      ].filter(Boolean).join(', ') || 'None';
+      const clips = document.getElementById('clips').value;
+      const deadline = document.getElementById('deadline').value || 'Not specified';
+      const notes = document.getElementById('notes').value || '—';
+
+      const subject = encodeURIComponent(`[Hire Request] ${type} – ${duration}`);
+      const body = encodeURIComponent(
+`Hi Shawaiz,
+
+I want to hire you for:
+• Type: ${type}
+• Duration: ${duration}
+• Turnaround: ${turnaround}
+• Extras: ${extras}
+• Raw clips: ${clips}
+• Deadline: ${deadline}
+
+Notes / Links:
+${notes}
+
+Thanks!`);
+
+      window.location.href = `mailto:indiapak935@gmail.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
